@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('score');
@@ -146,7 +145,7 @@ function endGame() {
     launchConfetti();
 }
 
-// Redémarrer le jeu avec le niveau choisi dans la modal
+// Redémarre le jeu avec le niveau choisi dans la modal
 document.getElementById('restart-easy').addEventListener('click', () => {
     document.getElementById('end-modal').style.display = 'none';
     startGame('easy');
@@ -161,6 +160,11 @@ document.getElementById('restart-hard').addEventListener('click', () => {
     document.getElementById('end-modal').style.display = 'none';
     startGame('hard');
 });
+
+document.getElementById('night-mode-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('night-mode'); 
+});
+
 
 
 document.getElementById('start-easy').addEventListener('click', () => startGame('easy'));
