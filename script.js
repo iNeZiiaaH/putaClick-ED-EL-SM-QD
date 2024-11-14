@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 const scoreDisplay = document.getElementById('score');
@@ -121,12 +122,46 @@ function startGame(level) {
     }, 1000);
 }
 
+function launchConfetti() {
+    const confettiSettings = {
+        particleCount: 150,  
+        spread: 80,             
+        origin: { y: 0.6 },   
+        colors: ['#ff69b4', '#ff6347', '#ffeb3b', '#00e676', '#00bcd4'] 
+    };
+
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => confetti(confettiSettings), i * 200);
+    }
+}
+
 function endGame() {
     clearInterval(gameInterval);
     clearInterval(objectInterval);
-    clearInterval(timerInterval); 
-    alert(`Temps écoulé ! Votre score est ${score}`);
+    clearInterval(timerInterval);
+
+    document.getElementById('final-score').innerText = score;
+    document.getElementById('end-modal').style.display = 'flex';
+
+    launchConfetti();
 }
+
+// Redémarrer le jeu avec le niveau choisi dans la modal
+document.getElementById('restart-easy').addEventListener('click', () => {
+    document.getElementById('end-modal').style.display = 'none';
+    startGame('easy');
+});
+
+document.getElementById('restart-intermediate').addEventListener('click', () => {
+    document.getElementById('end-modal').style.display = 'none';
+    startGame('intermediate');
+});
+
+document.getElementById('restart-hard').addEventListener('click', () => {
+    document.getElementById('end-modal').style.display = 'none';
+    startGame('hard');
+});
+
 
 document.getElementById('start-easy').addEventListener('click', () => startGame('easy'));
 document.getElementById('start-intermediate').addEventListener('click', () => startGame('intermediate'));
